@@ -64,37 +64,29 @@
         </style>
     </head>
     <body>
-        <script
-            src="https://www.paypal.com/sdk/js?client-id=AVsREKZdtgsYyaljQ96c8hNmA_ytzQFPkCxEN9u7pNVHXZTRvBloEB351kAhOYvOpSKb6oeBI2AnfCna&vault=true">
-        </script>
+       
 
-        <div id="paypal-button-container"></div>
-
+      <div id="paypal-button-container"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=AVsREKZdtgsYyaljQ96c8hNmA_ytzQFPkCxEN9u7pNVHXZTRvBloEB351kAhOYvOpSKb6oeBI2AnfCna&vault=true" data-sdk-integration-source="button-factory"></script>
         <script>
-            paypal.Buttons().render('#paypal-button-container');
+          paypal.Buttons({
+              style: {
+                  shape: 'pill',
+                  color: 'gold',
+                  layout: 'horizontal',
+                  label: 'subscribe',
+                  
+              },
+              createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                  'plan_id': 'P-0K831498YV146180AL5LIXFY'
+                });
+              },
+              onApprove: function(data, actions) {
+                alert(data.subscriptionID);
+              }
+          }).render('#paypal-button-container');
         </script>
-
-    </body>
-    <script>
-         paypal.Buttons({
-
-          createSubscription: function(data, actions) {
-
-            return actions.subscription.create({
-
-              'plan_id': 'P-8NG97075Y3885283GL5I3YMY'
-
-            });
-
-          },
-
-          onApprove: function(data, actions) {
-
-            alert('You have successfully created subscription ' + data.subscriptionID);
-
-          }
-
-
-        }).render('#paypal-button-container');
-    </script>
 </html>
+
+
